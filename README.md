@@ -114,3 +114,7 @@ The phase 1 harness is retained as `pnpm test:live:phase1` for historical isolat
 ## Current boundaries
 
 Feature extraction includes sentence/paragraph length, vocabulary diversity, punctuation, contractions, casing, lists, fixed function words, openers, greetings/sign-offs, phrases, and emoji. Signature phrase comparison uses a small self-authored neutral reference corpus. Cross-document boilerplate detection, `restyle`, runs logging, and the upload page remain future work.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
