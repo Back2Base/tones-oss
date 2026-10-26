@@ -1,0 +1,6 @@
+hey team, here's the plan. we'll ship the small change first! It keeps the next step clear.
+
+- Review the API response.
+- Send a short note, then update the doc.
+
+I don't want a long meeting; I want one useful answer. Thanks 🙂

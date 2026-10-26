@@ -1,0 +1,74 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "style-ingest",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-22",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "vectorize": [
+    {
+      "binding": "VECTORIZE",
+      "index_name": "style-chunks"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "SAMPLES",
+      "bucket_name": "style-samples"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "style",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "../../migrations"
+    }
+  ],
+  "queues": {
+    "consumers": [
+      {
+        "queue": "style-r2-events",
+        "max_batch_size": 10,
+        "max_retries": 5,
+        "dead_letter_queue": "style-r2-events-dlq"
+      },
+      {
+        "queue": "style-r2-events-dlq",
+        "max_batch_size": 10,
+        "max_retries": 5
+      }
+    ]
+  },
+  "workflows": [
+    {
+      "name": "ingest-sample",
+      "binding": "INGEST_WORKFLOW",
+      "class_name": "IngestSample"
+    },
+    {
+      "name": "rebuild-profile",
+      "binding": "PROFILE_WORKFLOW",
+      "class_name": "RebuildProfile"
+    }
+  ],
+  "vars": {
+    "MODEL_GUIDE": "@cf/openai/gpt-oss-120b",
+    "MODEL_EMBED": "@cf/qwen/qwen3-embedding-0.6b",
+    "AI_GATEWAY_ID": "style-mcp"
+  },
+  "services": [
+    {
+      "binding": "AUTH",
+      "service": "style-mcp",
+      "entrypoint": "AuthService"
+    }
+  ]
+}

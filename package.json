@@ -1,0 +1,57 @@
+{
+  "name": "tones",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.18.3",
+  "scripts": {
+    "test": "pnpm test:unit && pnpm test:workers",
+    "typecheck": "tsc --noEmit",
+    "dev:ingest": "wrangler dev --config workers/ingest/wrangler.jsonc",
+    "types": "pnpm types:ingest && pnpm types:mcp",
+    "build": "pnpm build:ingest && pnpm build:mcp",
+    "build:ingest": "wrangler deploy --dry-run --config workers/ingest/wrangler.jsonc --outdir ../../.build/ingest",
+    "build:mcp": "wrangler deploy --dry-run --config workers/mcp/wrangler.jsonc --outdir ../../.build/mcp",
+    "test:unit": "node --env-file-if-exists=.env --experimental-strip-types --test tests/*.test.ts",
+    "test:workers": "vitest run --config vitest.config.ts && pnpm test:mcp",
+    "provision": "node --env-file-if-exists=.env --experimental-strip-types scripts/provision.ts",
+    "deploy:ingest": "wrangler deploy --config workers/ingest/wrangler.jsonc",
+    "notifications:configure": "wrangler r2 bucket notification create style-samples --event-type object-create --prefix raw/ --queue style-r2-events",
+    "gateway:configure": "node --env-file-if-exists=.env --experimental-strip-types scripts/gateway.ts",
+    "test:live": "node --env-file-if-exists=.env --experimental-strip-types scripts/test-mcp-live.ts",
+    "format": "prettier --write packages workers/ingest/src workers/mcp/src tests scripts vitest*.config.ts",
+    "test:mcp": "vitest run --config vitest.mcp.config.ts",
+    "dev:mcp": "wrangler dev --config workers/mcp/wrangler.jsonc --config workers/ingest/wrangler.jsonc",
+    "deploy:mcp": "wrangler deploy --config workers/mcp/wrangler.jsonc",
+    "types:ingest": "wrangler types workers/ingest/worker-configuration.d.ts --config workers/ingest/wrangler.jsonc --include-runtime false --env-interface IngestBindings",
+    "types:mcp": "wrangler types workers/mcp/worker-configuration.d.ts --config workers/mcp/wrangler.jsonc --config workers/ingest/wrangler.jsonc --include-runtime false --env-interface McpBindings",
+    "test:live:phase1": "node --env-file-if-exists=.env --experimental-strip-types scripts/acceptance.ts",
+    "auth:configure": "node --env-file-if-exists=.env --experimental-strip-types scripts/configure-auth0.ts",
+    "auth:connect": "node --env-file-if-exists=.env --experimental-strip-types scripts/connect-mcp.ts",
+    "auth:disconnect": "node --env-file-if-exists=.env --experimental-strip-types scripts/disconnect-mcp.ts",
+    "benchmark:mcp": "node --env-file-if-exists=.env --experimental-strip-types scripts/benchmark-mcp.ts",
+    "test:compatibility": "node --env-file-if-exists=.env --experimental-strip-types scripts/check-mcp-compatibility.ts"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "1.4.7",
+    "@cloudflare/workers-types": "5.20261023.1",
+    "@types/node": "24.19.2",
+    "jsonc-parser": "3.3.1",
+    "prettier": "3.6.2",
+    "typescript": "7.0.2",
+    "vitest": "4.1.12",
+    "wrangler": "4.152.0"
+  },
+  "engines": {
+    "node": ">=24 <25",
+    "pnpm": "10.18.3"
+  },
+  "dependencies": {
+    "@cloudflare/workers-oauth-provider": "1.2.4",
+    "@modelcontextprotocol/client": "2.3.1",
+    "@modelcontextprotocol/server": "2.3.1",
+    "agents": "0.30.1",
+    "jose": "6.1.0",
+    "ulid": "3.0.2",
+    "zod": "4.6.5"
+  }
+}

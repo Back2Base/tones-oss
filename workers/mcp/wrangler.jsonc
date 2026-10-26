@@ -1,0 +1,49 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "style-mcp",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-22",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "vectorize": [
+    {
+      "binding": "VECTORIZE",
+      "index_name": "style-chunks"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "style",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "../../migrations"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "OAUTH_KV",
+      "id": "00000000000000000000000000000000"
+    }
+  ],
+  "services": [
+    {
+      "binding": "INGEST",
+      "service": "style-ingest",
+      "entrypoint": "IngestService"
+    }
+  ],
+  "vars": {
+    "PUBLIC_ORIGIN": "https://tones.example.com",
+    "MODEL_EMBED": "@cf/qwen/qwen3-embedding-0.6b",
+    "MODEL_CLASSIFY": "@cf/zai-org/glm-4.7-flash",
+    "AI_GATEWAY_ID": "style-mcp"
+  }
+}

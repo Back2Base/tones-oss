@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "wordCount": 41,
+  "sentenceLength": {
+    "mean": 6.833333333333333,
+    "stdev": 3.624760528488591,
+    "p10": 1,
+    "p25": 4,
+    "p50": 6,
+    "p75": 8,
+    "p90": 11
+  },
+  "paragraphLength": {
+    "mean": 2,
+    "stdev": 0,
+    "p10": 2,
+    "p25": 2,
+    "p50": 2,
+    "p75": 2,
+    "p90": 2
+  },
+  "wordLengthMean": 4.121951219512195,
+  "movingAverageTtr": 0.8292682926829268,
+  "punctuationPer1k": {
+    "—": 0,
+    "–": 0,
+    ";": 24.390243902439025,
+    ",": 48.78048780487805,
+    ":": 0,
+    "!": 24.390243902439025,
+    "?": 0,
+    "(": 0,
+    ")": 0,
+    "\"": 0,
+    "'": 73.17073170731707,
+    "ellipsis": 0,
+    "hyphenated_compound": 0
+  },
+  "contractionsPer100": 4.878048780487805,
+  "lowercaseSentenceShare": 0.16666666666666666,
+  "allCapsPer1k": 24.390243902439025,
+  "usesLists": true,
+  "functionWordFrequencies": {
+    "the": 0.12195121951219512,
+    "of": 0,
+    "and": 0,
+    "to": 0,
+    "a": 0.04878048780487805,
+    "in": 0,
+    "that": 0,
+    "is": 0,
+    "was": 0,
+    "he": 0,
+    "for": 0,
+    "it": 0.024390243902439025,
+    "with": 0,
+    "as": 0,
+    "his": 0,
+    "on": 0,
+    "be": 0,
+    "at": 0,
+    "by": 0,
+    "i": 0.04878048780487805,
+    "this": 0,
+    "had": 0,
+    "not": 0,
+    "are": 0,
+    "but": 0,
+    "from": 0,
+    "or": 0,
+    "have": 0,
+    "an": 0,
+    "they": 0,
+    "which": 0,
+    "one": 0.024390243902439025,
+    "you": 0,
+    "were": 0,
+    "her": 0,
+    "all": 0,
+    "she": 0,
+    "there": 0,
+    "would": 0,
+    "their": 0,
+    "we": 0,
+    "him": 0,
+    "been": 0,
+    "has": 0,
+    "when": 0,
+    "who": 0,
+    "will": 0,
+    "no": 0,
+    "more": 0,
+    "if": 0
+  },
+  "openers": [
+    {
+      "text": "hey team here's",
+      "count": 1
+    },
+    {
+      "text": "i don't want",
+      "count": 1
+    },
+    {
+      "text": "it keeps the",
+      "count": 1
+    },
+    {
+      "text": "review the api",
+      "count": 1
+    },
+    {
+      "text": "send a short",
+      "count": 1
+    },
+    {
+      "text": "thanks",
+      "count": 1
+    }
+  ],
+  "greetings": [
+    "hey team, here's the plan. we'll ship the small change first! It keeps the next step clear."
+  ],
+  "signoffs": [],
+  "signaturePhrases": [],
+  "signatureReference": "bundled-neutral-v1",
+  "emojiPer1k": 24.390243902439025
+}

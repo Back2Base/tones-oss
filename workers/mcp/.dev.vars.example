@@ -1,0 +1,5 @@
+AUTH0_DOMAIN="auth.example.com"
+AUTH0_CLIENT_ID="your-regular-web-application-client-id"
+AUTH0_CLIENT_SECRET="your-client-secret"
+COOKIE_ENCRYPTION_KEY="generate-32-random-bytes-as-base64url"
+ALLOWED_SUBS="auth0|your-fixed-subject"
