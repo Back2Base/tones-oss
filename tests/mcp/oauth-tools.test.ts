@@ -340,6 +340,20 @@ it('exposes all seven tools through the SDK HTTP client and keeps identity out o
     await client.close();
   }
 });
+it('keeps only the rewrite tools out of client tool search', async () => {
+  const { tokens } = await grant();
+  const client = await connect(tokens.access_token, fakeEnv());
+  try {
+    const { tools } = await client.listTools();
+    const alwaysLoaded = tools
+      .filter((t) => t._meta?.['anthropic/alwaysLoad'] === true)
+      .map((t) => t.name)
+      .sort();
+    expect(alwaysLoaded).toEqual(['get_comment_style', 'get_style_context']);
+  } finally {
+    await client.close();
+  }
+});
 it('finds only my samples by source and skips deleted ones', async () => {
   const e = { ...fakeEnv(), ALLOWED_SUBS: 'auth0|allowed,auth0|other' };
   const [mine, deleted, foreign] = [ulid(), ulid(), ulid()];

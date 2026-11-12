@@ -16,6 +16,10 @@ const categories = Object.entries(REGISTER_DESCRIPTIONS)
   .join('; ');
 const register = z.enum(REGISTERS).describe(`Writing category: ${categories}`);
 const sampleId = z.string().regex(/^[0-9A-HJKMNP-TV-Z]{26}$/);
+// Claude Code moves MCP tools behind tool search once a client's catalog is
+// large. The rewrite tools stay in the prompt so a writing hook can call them
+// directly; sample management loads on demand.
+const ALWAYS_LOADED = new Set(['get_style_context', 'get_comment_style']);
 const result = (payload: Record<string, unknown>) => ({
   structuredContent: payload,
   content: [{ type: 'text' as const, text: JSON.stringify(payload) }],
@@ -49,6 +53,9 @@ export function createServer(env: McpEnv, scopes: string[]) {
           idempotentHint: !['add_sample', 'rebuild_profile'].includes(name),
           openWorldHint: false,
         },
+        ...(ALWAYS_LOADED.has(name) && {
+          _meta: { 'anthropic/alwaysLoad': true },
+        }),
       },
       async (input) => {
         try {
